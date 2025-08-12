@@ -127,13 +127,3 @@ minikube stop
 
 ---
 
-## Where to Configure Things
-- **Secrets:** `kubernetes/app-secret.yml`
-- **DB Settings:** `src/main/resources/application.properties`
-- **Docker Image:** `kubernetes/vproapp-dep.yml`
-- **Other Services:** `kubernetes/` directory
-
----
-
-## Questions?
-Open an issue or ask your AI assistant! 
