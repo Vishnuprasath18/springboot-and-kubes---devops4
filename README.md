@@ -1,13 +1,13 @@
 # Java App using Kubernetes (vProfile-style)
 
-## TL;DR for beginners (explain like I’m 5)
+## Explanation
 - This is a tiny website made with Spring Boot (Java). It has pages like `/`, `/health`, `/profile`, `/status`.
 - We pack the app into a box called a Docker image so it runs anywhere.
 - We give the image to Minikube (your tiny local Kubernetes) which runs many boxes for us:
   - one box for the app, and other boxes for helpers (MySQL, Memcached, RabbitMQ, Elasticsearch).
 - You open the app in your browser using a URL that Minikube gives you.
 
-### What you’ll do in plain steps
+### To Run
 1) Build the image (already done here): `docker build -t vprofile:local .`
 2) Start Minikube: `minikube start`
 3) Give Minikube your image: `minikube image load vprofile:local`
