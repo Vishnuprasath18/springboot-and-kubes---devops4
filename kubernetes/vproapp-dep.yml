@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vproapp-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vproapp
+  template:
+    metadata:
+      labels:
+        app: vproapp
+    spec:
+      containers:
+      - name: vproapp
+        image: vprofile:local
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:mysql://vprodb:3306/accounts?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: db-username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: db-password
+        - name: MEMCACHED_ACTIVE_HOST
+          value: vprocache01
+        - name: MEMCACHED_ACTIVE_PORT
+          value: "11211"
+        - name: MEMCACHED_STANDBY_HOST
+          value: vprocache02
+        - name: MEMCACHED_STANDBY_PORT
+          value: "11211"
+        - name: RABBITMQ_ADDRESS
+          value: vpromq01
+        - name: RABBITMQ_PORT
+          value: "15672"
+        - name: RABBITMQ_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: rmq-username
+        - name: RABBITMQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: rmq-password
+        - name: ELASTICSEARCH_HOST
+          value: vprosearch01
+        - name: ELASTICSEARCH_PORT
+          value: "9300"
+        - name: ELASTICSEARCH_CLUSTER
+          value: vprofile
+        - name: ELASTICSEARCH_NODE
+          value: vprofilenode 

@@ -1,0 +1,23 @@
+# Java
+/target/
+*.class
+*.jar
+*.war
+*.iml
+
+# Maven
+.mvn/
+
+# IntelliJ
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Kubernetes secrets
+kubernetes/app-secret.yml 

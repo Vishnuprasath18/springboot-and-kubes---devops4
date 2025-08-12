@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vprosearch01
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vprosearch01
+  template:
+    metadata:
+      labels:
+        app: vprosearch01
+    spec:
+      containers:
+      - name: elasticsearch
+        image: elasticsearch:7.17.10
+        env:
+        - name: discovery.type
+          value: single-node
+        - name: cluster.name
+          value: vprofile
+        - name: node.name
+          value: vprofilenode
+        ports:
+        - containerPort: 9300
+        - containerPort: 9200 
